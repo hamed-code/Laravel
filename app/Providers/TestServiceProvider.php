@@ -28,13 +28,13 @@ class TestServiceProvider extends ServiceProvider
 //        view()->composer('*', function ($view){
 //            $view->with('count', 4);
 //        });
-//        view()->composer('layout.master', function ($view){
+//        view()->composer('layouts.master', function ($view){
 //            $view->with('count', 4);
 //        });
 
-//        view()->composer('layout.master', \App\Http\View\Composers\TestComposer::class);
-//        view()->composer(['layout.master', 'layout.header'], \App\Http\View\Composers\TestComposer::class);/
-//        view()->creator(['layout.master', 'layout.header'], \App\Http\View\Composers\TestComposer::class); // before rendering your variable has exists
+//        view()->composer('layouts.master', \App\Http\View\Composers\TestComposer::class);
+//        view()->composer(['layouts.master', 'layouts.header'], \App\Http\View\Composers\TestComposer::class);/
+//        view()->creator(['layouts.master', 'layouts.header'], \App\Http\View\Composers\TestComposer::class); // before rendering your variable has exists
 
 //        Blade::directive('Hello', function (){
 //            return 'mm';
