@@ -19,9 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verify_at')->nullable();
             $table->string('password');
+            $table->bigInteger('country_id')->unsigned()->index();
             $table->rememberToken();
             $table->timestamps(); //make created_at and updated_at
 
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -9,8 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5|^8.0",
+        "albertcht/lumen-testing": "^1.1",
+        "barryvdh/laravel-ide-helper": "*",
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "^4.4",
+        "laravel/browser-kit-testing": "*",
         "laravel/framework": "^6.20.26",
         "laravel/tinker": "^2.5"
     },

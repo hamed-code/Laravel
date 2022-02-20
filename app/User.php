@@ -8,51 +8,30 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
 
-//    public function getEmailAttribute($value)
-//    {
-//        return $value ?: "No Email";
-//    }
-
-//    public function getFullNameAttribute()
-//    {
-//       return $this->first_name . ' ' . $this->last_name;
-//    }
-
-//    protected $casts = [
-//        'email' => 'string'
-//    ];
-
-    public function setNameAttribute($value)
+    public function post()
     {
-        $this->attributes['name'] = strtolower($value);
+        return $this->hasMany('App\Post');
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+//    public function image()
+//    {
+//        return $this->morphOne('App\Image', 'imageable');
+//    }
+//
+//    public function address()
+//    {
+//       return $this->hasOne('App\Address');
+//    }
+//
+//    public function info()
+//    {
+//       return $this->hasOneThrough('App\Information', 'App\Car');
+//    }
+//
+//    public function getFullNameAttribute()
+//    {
+//        return $this->first_name . ' ' . $this->last_name;
+//    }
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 }

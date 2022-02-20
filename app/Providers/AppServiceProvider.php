@@ -17,8 +17,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->isLocal()) {
+        $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
     }
+//    }
 
     /**
      * Bootstrap any application services.
@@ -31,8 +34,8 @@ class AppServiceProvider extends ServiceProvider
 //        Blade::directive('ifGuest', function (){
 /*            return "<?php if (auth()->guest()) ?>";*/
 //        });
-        Blade::directive('Hamed', function (){
-            return 'hamed is here....';
-        });
+//        Blade::directive('Hamed', function (){
+//            return 'hamed is here....';
+//        });
     }
 }

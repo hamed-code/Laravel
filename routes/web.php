@@ -13,5 +13,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('post', 'PostController');
+Route::get('/', 'HomeController@index');
 
+
+//Route::get('/contact', 'ContactMessageController@create');
+//Route::get('/contact', 'ContactMessageController@create');
+//Route::get('/', function (){
+//
+//});
+//Route::resource('/contact', 'ContactMessageController');
 

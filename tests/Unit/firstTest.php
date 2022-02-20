@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+//use Tests\TestCase;
 use PHPUnit\Framework\TestCase;
 
 class firstTest extends TestCase
@@ -11,8 +12,13 @@ class firstTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function test_input_missing_a_title_is_rejected()
     {
-        $this->assertTrue(true);
+        $response = $this->post(route('post.store'), ['title' => 'test title']);
+        $response->assertRedirect();
+        $response->assertSessionHasErrors();
+//        $response->assert
     }
+
+
 }

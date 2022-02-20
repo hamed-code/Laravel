@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Builder;
+use App\Http\Requests\StorePost;
 use App\Post;
+use App\Rules\Uppercase;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use function FastRoute\TestFixtures\all_options_cached;
 
 class PostController extends Controller
 {
@@ -12,10 +18,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::all();
-
+        $posts = Post::with('user')->get();
         return view('post.index', compact('posts'));
     }
 
@@ -26,19 +31,22 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
-        return view('post.create');
+        $posts = Post::all();
+        return view('post.create', compact('posts'));
     }
 
     /**
      * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePost $request)
     {
-        //
+        $validated = $request->validated();
+        dd($validated);
+
+        Post::create($request->all());
+        return redirect()->route('post.index')->with('success', 'record created successfully');
     }
 
     /**
@@ -47,10 +55,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        return view('post.show');
-        //
+        return view('post.show', compact('post'));
     }
 
     /**
@@ -59,9 +66,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        return view('post.edit');
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -73,7 +80,13 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $input = $request->all();
+        $post->update($input);
+//        return view('post.edit', compact('post'));
+        return redirect()->route('post.index')->with('success', 'record updated successfully');
+
+//        $post->where('$post->title, $post->user_id', $post->id);
     }
 
     /**
@@ -82,8 +95,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('post.index')->with('success', 'record deleted successfully');
     }
 }
